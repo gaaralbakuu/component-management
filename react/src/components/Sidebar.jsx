@@ -110,8 +110,35 @@ function Sidebar(props) {
                     </div>
                 </div>
             </div>
-            <div className="px-[20px] mt-2">
-                <input type="text" className="border border-solid border-gray-200  rounded-2xl py-1" />
+            <div className="px-[20px] mt-4">
+                <div className="border border-solid border-black/20  rounded-3xl flex items-center gap-2 px-2 py-1">
+                    <div className="text-gray-600">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-4 h-4"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                            />
+                        </svg>
+                    </div>
+
+                    <div className="flex-1">
+                        <input
+                            type="text"
+                            className=" bg-transparent outline-none text-sm w-full"
+                            placeholder="Find components"
+                        />
+                    </div>
+
+                    <div className="bg-gray-200 px-[6px] rounded text-xs py-1 pointer-events-none">/</div>
+                </div>
             </div>
         </div>
     );
