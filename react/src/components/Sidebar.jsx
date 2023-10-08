@@ -61,7 +61,7 @@ function Sidebar(props) {
             style={{ width: sidebar.width }}
         >
             <div
-                className="absolute right-0 w-[10px] h-full hover:[background-image:_radial-gradient(at_center_center,rgba(0,0,0,0.2)_0%,transparent_70%,transparent_100%);] hover:[background-size:_50px_100%;] cursor-col-resize border-r border-solid border-[#e1e6ea]"
+                className={`absolute right-0 w-[10px] h-full hover:[background-image:_radial-gradient(at_center_center,rgba(0,0,0,0.2)_0%,transparent_70%,transparent_100%);] hover:[background-size:_50px_100%;] cursor-col-resize border-r border-solid border-[#e1e6ea] ${isDrag ? "[background-image:_radial-gradient(at_center_center,rgba(0,0,0,0.2)_0%,transparent_70%,transparent_100%);] [background-size:_50px_100%;]" : ""}`}
                 ref={sidebarResizeRef}
             ></div>
             <div className="p-[20px] pb-0 flex justify-between items-center">
