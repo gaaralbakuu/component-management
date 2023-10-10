@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
-function Header({ onFullscreen, props }) {
+function Header({ onFullscreen, ...props }) {
     const { container } = useSelector((state) => state.main);
     return (
         <div className="border-b border-gray-200 flex justify-between">

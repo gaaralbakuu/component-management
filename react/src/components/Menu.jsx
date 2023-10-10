@@ -9,8 +9,8 @@ function Menu({ list }) {
     const [isOpen, setOpen] = useState(false);
     const menuRef = useRef();
 
-    const handleOpen = () => {
-        setOpen(true);
+    const handleToggle = () => {
+        setOpen(!isOpen);
     };
 
     const handleClose = () => {
@@ -44,7 +44,7 @@ function Menu({ list }) {
         <div className="relative" ref={menuRef}>
             <div
                 className="text-gray-600 p-1 hover:bg-lime-200 hover:text-lime-600 rounded cursor-pointer"
-                onClick={handleOpen}
+                onClick={handleToggle}
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

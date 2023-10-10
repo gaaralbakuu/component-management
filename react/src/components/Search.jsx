@@ -1,18 +1,21 @@
 import React from "react";
-import { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import KeyShortcut from "./KeyShortcut";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchFocus } from "../store/reducers/main";
+import {
+    setSearchFocus,
+    setSearchText,
+    setSidebarTab,
+} from "../store/reducers/main";
 
 function Search({ searchRef }) {
     const { search } = useSelector((state) => state.main);
     const dispatch = useDispatch();
-    const [value, setValue] = useState("");
 
     const handleFocus = () => {
         dispatch(setSearchFocus(true));
+        dispatch(setSidebarTab(2));
     };
 
     const handleBlur = () => {
@@ -20,7 +23,8 @@ function Search({ searchRef }) {
     };
 
     const handleClear = () => {
-        setValue("");
+        dispatch(setSearchText(""));
+        dispatch(setSidebarTab(1));
     };
 
     useEffect(() => {
@@ -61,7 +65,7 @@ function Search({ searchRef }) {
                             />
                         </svg>
                     </div>
-                    {value.length ? (
+                    {search.text.length ? (
                         <div
                             onClick={handleClear}
                             className="pointer-events-auto cursor-pointer"
@@ -92,7 +96,7 @@ function Search({ searchRef }) {
                         className={`bg-transparent border border-solid pl-7 pr-6
                         }  rounded-3xl px-2 py-1 outline-none text-sm w-full ${
                             search.isFocused
-                                ? "border-lime-500 placeholder:text-lime-600"
+                                ? "border-lime-700"
                                 : "border-black/20"
                         }`}
                         placeholder={
@@ -103,9 +107,9 @@ function Search({ searchRef }) {
                         onFocus={handleFocus}
                         onBlur={handleBlur}
                         onChange={(e) => {
-                            setValue(e.target.value);
+                            dispatch(setSearchText(e.target.value));
                         }}
-                        value={value}
+                        value={search.text}
                         ref={searchRef}
                         aria-autocomplete="list"
                     />

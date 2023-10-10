@@ -6,12 +6,15 @@ import { setSidebarDrag, setSidebarWidth } from "../store/reducers/main";
 import Search from "./Search";
 import { useCallback } from "react";
 import Menu from "./Menu";
+import KeyShortcut from "./KeyShortcut";
+import SidebarList from "./SidebarList";
 
-function Sidebar({onFullscreen, ...props}) {
+function Sidebar({ onFullscreen, ...props }) {
     const { sidebar, search, container } = useSelector((state) => state.main);
     const dispatch = useDispatch();
     const sidebarResizeRef = useRef();
     const searchRef = useRef();
+    const sidebarRef = useRef();
 
     const [clientDragX, setClientDragX] = useState(0);
 
@@ -137,6 +140,7 @@ function Sidebar({onFullscreen, ...props}) {
         <div
             className="relative flex flex-col bg-lime-50/50"
             style={{ width: sidebar.width }}
+            ref={sidebarRef}
         >
             <div
                 className={`absolute right-0 w-[10px] h-full hover:[background-image:_radial-gradient(at_center_center,rgba(0,0,0,0.2)_0%,transparent_70%,transparent_100%);] hover:[background-size:_50px_100%;] cursor-col-resize border-r border-solid border-gray-200 ${
@@ -173,6 +177,7 @@ function Sidebar({onFullscreen, ...props}) {
                 </div>
             </div>
             <Search searchRef={searchRef} />
+            <SidebarList />
         </div>
     );
 }

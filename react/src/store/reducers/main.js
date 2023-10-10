@@ -5,12 +5,14 @@ const mainSlice = createSlice({
     initialState: {
         search: {
             isFocused: false,
+            text: "",
         },
         sidebar: {
             width: 300,
             min: 300,
             max: window.innerWidth - 300,
-            isDrag: false
+            isDrag: false,
+            tabs: 1, // 1 is components, 2 is search recently
         },
         container: {
             isFullscreen: false,
@@ -26,8 +28,14 @@ const mainSlice = createSlice({
         setSidebarDrag: (state, action) => {
             state.sidebar.isDrag = action.payload;
         },
+        setSidebarTab: (state, action) => {
+            state.sidebar.tab = action.payload;
+        },
         setSearchFocus: (state, action) => {
             state.search.isFocused = action.payload;
+        },
+        setSearchText: (state, action) => {
+            state.search.text = action.payload;
         },
         setFullscreen: (state, action) => {
             state.container.isFullscreen = action.payload;
@@ -35,5 +43,5 @@ const mainSlice = createSlice({
     }
 })
 
-export const { setSidebarWidth, setSidebarMax, setSidebarDrag, setSearchFocus, setFullscreen } = mainSlice.actions
+export const { setSidebarWidth, setSidebarMax, setSidebarDrag, setSidebarTab, setSearchFocus, setSearchText, setFullscreen } = mainSlice.actions
 export default mainSlice.reducer

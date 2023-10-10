@@ -32,7 +32,7 @@ function Layout() {
 
         const handleTest = (e) => {
             if (e.keyCode === 32) {
-                alert();
+                console.log(e);
             }
         };
 
