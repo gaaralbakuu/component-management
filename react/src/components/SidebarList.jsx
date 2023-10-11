@@ -13,7 +13,18 @@ function SidebarList(props) {
         dispatch(setSidebarTab(1));
     };
 
-    const list = [{}];
+    const list = [
+        {
+            id: 1,
+            name: "BUTTON",
+            children: [
+                {
+                    id: 1,
+                    name: "iOS style",
+                },
+            ],
+        },
+    ];
 
     useEffect(() => {
         const handleSidebarListKeydown = (e) => {
@@ -29,6 +40,58 @@ function SidebarList(props) {
 
     return (
         <div>
+            {sidebar.tab === 1 && (
+                <div className="mt-4">
+                    {list.map((item, index) => (
+                        <div className="flex flex-col">
+                            <div className="flex gap-1 items-center cursor-pointer select-none">
+                                <div className="w-5 h-5 flex items-center justify-center">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth={1}
+                                        stroke="currentColor"
+                                        className="w-3 h-3"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                                        />
+                                    </svg>
+                                </div>
+                                <div className="tracking-[4px] text-xs font-bold text-gray-600">
+                                    {item.name}
+                                </div>
+                            </div>
+                            <div className="flex px-[20px]">
+                                {item.children.map((child, indexChild) => (
+                                    <div className="flex items-center gap-1">
+                                        <div>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth={1}
+                                                stroke="currentColor"
+                                                className="w-3 h-3"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <div>{child.name}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
             {sidebar.tab === 2 && (
                 <div>
                     {search.text.length === 0 ? (
@@ -90,8 +153,12 @@ function SidebarList(props) {
                         </div>
                     ) : (
                         <div className="mt-3 text-center px-[20px]">
-                            <div className="font-bold text-sm">No components found</div>
-                            <div className="text-xs text-gray-400 font-semibold">Find components by name or path</div>
+                            <div className="font-bold text-sm">
+                                No components found
+                            </div>
+                            <div className="text-xs text-gray-400 font-semibold">
+                                Find components by name or path
+                            </div>
                         </div>
                     )}
                 </div>

@@ -136,6 +136,28 @@ function Sidebar({ onFullscreen, ...props }) {
         }
     }, [sidebar.isDrag]);
 
+    useEffect(() => {
+        const handleSidebarBlurSearch = (e) => {
+            if (search.isFocused) {
+                if (!sidebarRef.current.contains(e.target)) {
+                    console.log(123);
+                }
+            }
+        };
+
+        if (sidebarRef.current) {
+            searchRef.current.addEventListener("blur", handleSidebarBlurSearch);
+        }
+
+        return () => {
+            if (sidebarRef.current)
+                searchRef.current.removeEventListener(
+                    "blur",
+                    handleSidebarBlurSearch
+                );
+        };
+    }, [sidebarRef, searchRef, search]);
+
     return (
         <div
             className="relative flex flex-col bg-lime-50/50"
