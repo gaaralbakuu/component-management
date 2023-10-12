@@ -3,24 +3,48 @@ import PropTypes from "prop-types";
 import KeyShortcut from "./KeyShortcut";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSidebarTab } from "../store/reducers/main";
+import { setListSelected, setSidebarTab } from "../store/reducers/main";
+import TreeLevel1 from "./ListView/TreeLevel1";
+import TreeLevel2 from "./ListView/TreeLevel2";
+import TreeLevel3 from "./ListView/TreeLevel3";
 
 function SidebarList(props) {
     const dispatch = useDispatch();
-    const { sidebar, search } = useSelector((state) => state.main);
+    const { sidebar, search, list } = useSelector((state) => state.main);
 
     const handleBackToComponents = () => {
         dispatch(setSidebarTab(1));
     };
 
-    const list = [
+    const handleSelected = (id) => {
+        return () => {
+            dispatch(setListSelected(id));
+        };
+    };
+
+    const lists = [
         {
             id: 1,
-            name: "BUTTON",
+            name: "PROJECT 1",
             children: [
                 {
                     id: 1,
-                    name: "iOS style",
+                    name: "Button",
+                    children: [
+                        { id: 1, name: "iOS style" },
+                        { id: 2, name: "Android style" },
+                        { id: 3, name: "Windows style" },
+                    ],
+                },
+                {
+                    id: 2,
+                    name: "Input",
+                    children: [{ id: 4, name: "iOS style" }],
+                },
+                {
+                    id: 3,
+                    name: "Textarea",
+                    children: [{ id: 5, name: "iOS style" }],
                 },
             ],
         },
@@ -42,53 +66,27 @@ function SidebarList(props) {
         <div>
             {sidebar.tab === 1 && (
                 <div className="mt-4">
-                    {list.map((item, index) => (
-                        <div className="flex flex-col">
-                            <div className="flex gap-1 items-center cursor-pointer select-none">
-                                <div className="w-5 h-5 flex items-center justify-center">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        strokeWidth={1}
-                                        stroke="currentColor"
-                                        className="w-3 h-3"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                                        />
-                                    </svg>
-                                </div>
-                                <div className="tracking-[4px] text-xs font-bold text-gray-600">
-                                    {item.name}
-                                </div>
-                            </div>
-                            <div className="flex px-[20px]">
-                                {item.children.map((child, indexChild) => (
-                                    <div className="flex items-center gap-1">
-                                        <div>
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1}
-                                                stroke="currentColor"
-                                                className="w-3 h-3"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <div>{child.name}</div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                    {lists.map((item, index) => (
+                        <TreeLevel1 key={index} name={item.name}>
+                            {item.children.map((child, indexChild) => (
+                                <TreeLevel2 key={indexChild} name={child.name}>
+                                    {child.children.map(
+                                        (gChild, indexGChild) => (
+                                            <TreeLevel3
+                                                key={indexGChild}
+                                                name={gChild.name}
+                                                onClick={handleSelected(
+                                                    gChild.id
+                                                )}
+                                                selected={
+                                                    list.selected === gChild.id
+                                                }
+                                            ></TreeLevel3>
+                                        )
+                                    )}
+                                </TreeLevel2>
+                            ))}
+                        </TreeLevel1>
                     ))}
                 </div>
             )}

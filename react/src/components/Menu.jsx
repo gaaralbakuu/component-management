@@ -43,7 +43,9 @@ function Menu({ list }) {
     return (
         <div className="relative" ref={menuRef}>
             <div
-                className="text-gray-600 p-1 hover:bg-lime-200 hover:text-lime-600 rounded cursor-pointer"
+                className={`text-gray-600 p-1 hover:bg-lime-200 hover:text-lime-600 rounded cursor-pointer ${
+                    isOpen ? "bg-lime-100 text-lime-600" : ""
+                }`}
                 onClick={handleToggle}
             >
                 <svg

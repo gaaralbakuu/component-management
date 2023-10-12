@@ -12,10 +12,14 @@ const mainSlice = createSlice({
             min: 300,
             max: window.innerWidth - 300,
             isDrag: false,
-            tabs: 1, // 1 is components, 2 is search recently
+            tab: 1, // 1 is components, 2 is search recently
         },
         container: {
             isFullscreen: false,
+        },
+        list: {
+            item: [],
+            selected: 0
         }
     },
     reducers: {
@@ -39,9 +43,12 @@ const mainSlice = createSlice({
         },
         setFullscreen: (state, action) => {
             state.container.isFullscreen = action.payload;
+        },
+        setListSelected: (state, action) => {
+            state.list.selected = action.payload;
         }
     }
 })
 
-export const { setSidebarWidth, setSidebarMax, setSidebarDrag, setSidebarTab, setSearchFocus, setSearchText, setFullscreen } = mainSlice.actions
+export const { setSidebarWidth, setSidebarMax, setSidebarDrag, setSidebarTab, setSearchFocus, setSearchText, setFullscreen, setListSelected } = mainSlice.actions
 export default mainSlice.reducer

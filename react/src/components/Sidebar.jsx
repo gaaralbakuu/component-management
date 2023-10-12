@@ -160,7 +160,7 @@ function Sidebar({ onFullscreen, ...props }) {
 
     return (
         <div
-            className="relative flex flex-col bg-lime-50/50"
+            className="relative flex flex-col bg-lime-50/30"
             style={{ width: sidebar.width }}
             ref={sidebarRef}
         >
